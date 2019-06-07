@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-form @submit.prevent="$emmit('processTodo', todo)">
+        <b-form @submit.prevent="$emit('processTodo', todo)">
             <b-form-group
                 id="todo"
                 label="todo"
@@ -10,9 +10,9 @@
                     autocomplete="off"
                     id="todo"
                     v-model="todo.text"
-                    :state="$v.todo.text.$invalid"
+                    :state="!$v.todo.text.$invalid"
                     placeholder="Introduce Tarea"
-                    @input="$v.todo.touch"
+                    @input="$v.todo.$touch"
                 ></b-form-input>
                 <b-form-invalid-feedback id="todoInfo" v-if="$v.todo.$dirty">
                     Este campo es requerido y debe tener una longitud minima de 4 caracteres
@@ -31,12 +31,12 @@
 </template>
 
 <script>
-    import { validatioMixin } from 'vuelidate' 
+    import { validationMixin } from 'vuelidate'
     import { required, minLength } from 'vuelidate/lib/validators'
 
     export default {
 
-        mixins: [validatioMixin],
+        mixins: [validationMixin],
 
         props: {
             todo: {
@@ -51,8 +51,7 @@
         validations: {
             todo: {
                 text: {
-                    required, 
-                    minLength: minLength(4)
+                    required, minLength: minLength(4)
                 }
             }
         }   
