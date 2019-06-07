@@ -7,7 +7,7 @@
           <b-nav-item exact to="/todos/create">Formulario de todos</b-nav-item>
         </b-nav>
       </b-row>
-    </b-container>
     <router-view/>
+    </b-container>
   </div>
 </template>
